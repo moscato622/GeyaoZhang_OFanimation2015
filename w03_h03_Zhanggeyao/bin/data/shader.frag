@@ -41,8 +41,8 @@ void main( void ) {
 
    p=p*2.0;
    
-   float x=p.x;
-   float y=p.y;
+   float x=p.x*cos(time);
+   float y=p.y*cos(time);
 
    float a=
        makePoint(x,y,3.3,2.9,0.3,0.3,time);
