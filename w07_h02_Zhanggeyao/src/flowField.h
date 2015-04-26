@@ -2,7 +2,6 @@
 //  flowField.h
 //  03_flowField
 //
-//  Created by Bernardo Santos Schorr on 3/31/15.
 //
 //
 
