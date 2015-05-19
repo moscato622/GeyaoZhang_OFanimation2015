@@ -14,13 +14,13 @@ public:
     void setup();
     
     void resetForces();
-    void applyForce(ofVec2f force);
+    void applyForce(ofVec3f force);
     void applyDampingForce(float damping);
     
     void update(float _x, float _y, float _speed);
     void draw();
     
 	float speed;
-    ofVec2f pos, vel, acc;
+    ofVec3f pos, vel, acc;
     
 };

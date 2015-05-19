@@ -10,13 +10,14 @@
 void Particle::setup() {
     pos.x = ofRandomWidth();
     pos.y = ofRandomHeight();
+	pos.z = ofRandomHeight();
 }
 
 void Particle::resetForces() {
     acc *= 0;
 }
 
-void Particle::applyForce(ofVec2f force) {
+void Particle::applyForce(ofVec3f force) {
     acc += force;
 }
 
@@ -30,7 +31,7 @@ void Particle::update(float _x,float _y, float _speed) {
 	speed = _speed;
     //pos += vel*abs(ofNoise(sin(ofGetElapsedTimef())));
 
-	
+
     
 }
 
@@ -50,9 +51,11 @@ void Particle::draw() {
 
 	
 	//cout<<ofGetMousePressed()<<endl;
-	
+	ofNoFill();
 	ofSetColor(255);
-	ofCircle(pos,abs(sin(vel.x)*cos(vel.y)*5));
+	ofDrawBox(pos, abs(sin(vel.x)*cos(vel.y)*5));
+	ofDrawSphere(pos, abs(sin(vel.x)*cos(vel.y)*5));
+	//ofCircle(pos,abs(sin(vel.x)*cos(vel.y)*5));
 	/////////////////Size flows beats/////////////////////
 	//ofCircle(pos,abs(vel.x*vel.y*speed));
 	

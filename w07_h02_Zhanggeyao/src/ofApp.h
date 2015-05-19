@@ -31,6 +31,11 @@ class ofApp : public ofBaseApp{
 		int nBandsToGet;
 		float N;
 
+		ofEasyCam cam;
+		
+
+		ofLight light;
+
     bool bDrawField;
     bool bDrawBackground;
 		

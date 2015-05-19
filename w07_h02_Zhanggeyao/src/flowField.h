@@ -18,16 +18,16 @@ public:
     
     //functions to set patterns on the flow field
     void setRandom(float scale);
-    void setNoise(float _x, float _y);
+    void setNoise(float _x, float _y, float _z);
     
     //to be called from the particle, so it knows the force of the flow where it stands on
-    ofVec2f getForceAt(float x, float y);
+    ofVec3f getForceAt(float x, float y, float z);
     
     //drawing the field
     void draw();
     
     //container for all the flows
-    vector<ofVec2f> field;
+    vector<ofVec3f> field;
     
     //The size of the field in pixels, e.g. 1024x768
     int screenWidth;

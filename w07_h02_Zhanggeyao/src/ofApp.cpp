@@ -6,9 +6,9 @@ void ofApp::setup(){
     ofSetBackgroundAuto(false);
     
 	speed =1;
-    flowField.setup(ofGetWidth(), ofGetHeight(), 20.0);
+    flowField.setup(ofGetWidth(), ofGetHeight(), 50.0);
     //flowField.setRandom(2.0);
-    flowField.setNoise(0.1,0.1);
+    flowField.setNoise(0.1,0.1,0.1);
     
     for (int i = 0; i < 5000; i++) {
         Particle myParticle;
@@ -33,19 +33,24 @@ void ofApp::setup(){
 	nBandsToGet = 128;
 
 	N = ofNoise(ofRandom(ofGetElapsedTimef()));
+	
+	/*light.setDirectional();
+    light.setPosition(1000, 1000, -1000);
+    light.lookAt(ofVec3f(0, 0, 0));
+    light.setDiffuseColor(ofFloatColor(1.0, 1.0, 1.0));*/
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	flowField.setNoise(sin(ofGetElapsedTimef())/10,sin(ofGetElapsedTimef())/10);
+	flowField.setNoise(sin(ofGetElapsedTimef())/10,sin(ofGetElapsedTimef())/10,cos(ofGetElapsedTimef())/10);
     
     for (int i = 0; i < particles.size(); i++){
         
         particles[i].resetForces();
         
         //get the force of the flowfield at the particle position
-        ofVec2f frc = flowField.getForceAt(particles[i].pos.x, particles[i].pos.y);
+        ofVec3f frc = flowField.getForceAt(particles[i].pos.x, particles[i].pos.y,particles[i].pos.z);
         
         //apply force to the particle
         particles[i].applyForce(frc);
@@ -81,7 +86,13 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+	ofEnableDepthTest();
     ofSetColor(255, 0, 0);
+
+	 //ofEnableLighting();
+    
+    //light.enable();
+    cam.begin();
     
     if(bDrawBackground) ofBackground(0);
     if (bDrawField) flowField.draw();
@@ -129,7 +140,8 @@ void ofApp::draw(){
     ofDrawBitmapString(buf.str(), 20, 20);
 
 	
-
+	cam.end();
+    ofDisableLighting();
 
 }
 
@@ -168,7 +180,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 	for (int i = 0; i < particles.size(); i++){
 	particles[i].update(x,y,speed);
 	}
-	flowField.setNoise(ofMap(x,0,ofGetWindowWidth(),0.1,0.5),ofMap(y,0,ofGetWindowHeight(),0.1,0.5));
+	flowField.setNoise(ofMap(x,0,ofGetWindowWidth(),0.1,0.5),ofMap(y,0,ofGetWindowHeight(),0.1,0.5),ofMap(y,0,ofGetWindowHeight(),0.1,0.5));
 
 }
 
